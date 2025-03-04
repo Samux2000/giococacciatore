@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import corso.java.entities.Bonus;
 import corso.java.entities.BonusMovimento;
 import corso.java.entities.DarkKnight;
 import corso.java.entities.DirtySlime;
@@ -17,7 +18,7 @@ public class GameMasterV1 implements GameMaster {
 	private final HunterPawn hunter = new HunterPawn(20, 5);
 	private final MonsterDecorator darkKnight = new MonsterDecorator(new DarkKnight(20, 2));
 	private final List<MonsterDecorator> monsters = new ArrayList<MonsterDecorator>();
-	private List<BonusMovimento> bonusMovimenti = new ArrayList<BonusMovimento>();
+	private List<Bonus> bonus = new ArrayList<Bonus>();
 
 	private final Random rnd = new Random();
 
@@ -36,14 +37,14 @@ public class GameMasterV1 implements GameMaster {
 		placeHunter(row, column);
 		// Disposizione Bonus
 		for (int i = 0; i < rnd.nextInt(2, 5); ++i) {
-			bonusMovimenti.add(new BonusMovimento());
+			bonus.add(new BonusMovimento());
 		}
 		spawnBonus();
-		BonusMovimento bonusMov = new BonusMovimento();
-		gameGrid.getCells()[2][2] = bonusMov;
-		bonusMov.setRow(2);
-		bonusMov.setColumn(2);
-		bonusMovimenti.add(bonusMov);
+//		BonusMovimento bonusMov = new BonusMovimento();
+//		gameGrid.getCells()[2][2] = bonusMov;
+//		bonusMov.setRow(2);
+//		bonusMov.setColumn(2);
+//		bonusMovimenti.add(bonusMov);
 	}
 
 	private void spawnMonsters() {
@@ -61,13 +62,13 @@ public class GameMasterV1 implements GameMaster {
 		gameGrid.getCells()[row][col] = monster;
 	}
 
-	private void spawnBonus() {
-		for (BonusMovimento bonusMovimento : bonusMovimenti) {
-			var x = rnd.nextInt(gameGrid.getWidth());
-			var y = rnd.nextInt(gameGrid.getHeight());
-			placeBonus(bonusMovimento, y, x);
-		}
-	}
+//	private void spawnBonus() {
+//		for (BonusMovimento bonusMovimento : bonusMovimenti) {
+//			var x = rnd.nextInt(gameGrid.getWidth());
+//			var y = rnd.nextInt(gameGrid.getHeight());
+//			placeBonus(bonusMovimento, y, x);
+//		}
+//	}
 
 	private void placeBonus(BonusMovimento movimento, int row, int col) {
 		gameGrid.getCells()[movimento.getRow()][movimento.getColumn()] = null;
@@ -200,19 +201,12 @@ public class GameMasterV1 implements GameMaster {
 				monsters.remove(monster);
 			}
 		}
-//		if (bonusMov != null) {
-//			if ((hunter.getRow() == bonusMov.getRow()) && (hunter.getColumn() == bonusMov.getRow())) {
-//				this.movimenti += ((BonusMovimento) bonusMov).getMovimenti();
-//				bonusMov = null;
-//				gameGrid.getCells()[2][2] = null;
+//		for (BonusMovimento bonus : bonusMovimenti) {
+//			if((hunter.getRow() == bonus.getRow()) && (hunter.getColumn() == bonus.getColumn())) {
+//				gameGrid.getCells()[bonus.getRow()][bonus.getColumn()] = null;
+//				this.movimenti += bonus.getMovimenti();
 //			}
 //		}
-		for (BonusMovimento bonus : bonusMovimenti) {
-			if((hunter.getRow() == bonus.getRow()) && (hunter.getColumn() == bonus.getColumn())) {
-				gameGrid.getCells()[bonus.getRow()][bonus.getColumn()] = null;
-				this.movimenti += bonus.getMovimenti();
-			}
-		}
 		if (monsters.size() == 0) { // se non ci sono mostri
 			won = true;
 		}
