@@ -18,7 +18,7 @@ public class GameMasterV1 implements GameMaster {
 	private final HunterPawn hunter = new HunterPawn(20, 5);
 	private final MonsterDecorator darkKnight = new MonsterDecorator(new DarkKnight(20, 2));
 	private final List<MonsterDecorator> monsters = new ArrayList<MonsterDecorator>();
-	private List<Bonus> bonus = new ArrayList<Bonus>();
+	private List<Bonus> bonusLista = new ArrayList<Bonus>();
 
 	private final Random rnd = new Random();
 
@@ -37,7 +37,7 @@ public class GameMasterV1 implements GameMaster {
 		placeHunter(row, column);
 		// Disposizione Bonus
 		for (int i = 0; i < rnd.nextInt(2, 5); ++i) {
-			bonus.add(new BonusMovimento());
+			bonusLista.add(new BonusMovimento());
 		}
 		spawnBonus();
 //		BonusMovimento bonusMov = new BonusMovimento();
@@ -63,10 +63,10 @@ public class GameMasterV1 implements GameMaster {
 	}
 
 	private void spawnBonus() {
-		for (Bonus bonus : bonusLista) {
+		for (Bonus bonus1 : bonusLista) {
 			var x = rnd.nextInt(gameGrid.getWidth());
 			var y = rnd.nextInt(gameGrid.getHeight());
-			placeBonus(bonus, y, x);
+			placeBonus(bonus1, y, x);
 		}
 	}
 
