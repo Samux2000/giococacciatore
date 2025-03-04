@@ -62,19 +62,19 @@ public class GameMasterV1 implements GameMaster {
 		gameGrid.getCells()[row][col] = monster;
 	}
 
-//	private void spawnBonus() {
-//		for (BonusMovimento bonusMovimento : bonusMovimenti) {
-//			var x = rnd.nextInt(gameGrid.getWidth());
-//			var y = rnd.nextInt(gameGrid.getHeight());
-//			placeBonus(bonusMovimento, y, x);
-//		}
-//	}
+	private void spawnBonus() {
+		for (Bonus bonus : bonusLista) {
+			var x = rnd.nextInt(gameGrid.getWidth());
+			var y = rnd.nextInt(gameGrid.getHeight());
+			placeBonus(bonus, y, x);
+		}
+	}
 
-	private void placeBonus(BonusMovimento movimento, int row, int col) {
-		gameGrid.getCells()[movimento.getRow()][movimento.getColumn()] = null;
-		movimento.setRow(row);
-		movimento.setColumn(col);
-		gameGrid.getCells()[row][col] = movimento;
+	private void placeBonus(Bonus bonus, int row, int col) {
+		gameGrid.getCells()[bonus.getRow()][bonus.getColumn()] = null;
+		bonus.setRow(row);
+		bonus.setColumn(col);
+		gameGrid.getCells()[row][col] = bonus;
 	}
 
 	private void placeHunter(int row, int col) {

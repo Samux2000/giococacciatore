@@ -5,9 +5,13 @@ import lombok.Data;
 
 @Data
 
-public abstract class Bonus extends GameActor implements Pawn{
+public abstract class Bonus extends GameActor implements Pawn {
 
-	 public Bonus(int lifeLevel, int attack, char symbol) {
+	public Bonus(int lifeLevel, int attack, char symbol) {
 		super(lifeLevel, attack, symbol);
-	 }
+	}
+
+	public abstract void setRow(int row);
+	
+	public abstract void setColumn(int column);
 }

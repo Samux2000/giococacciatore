@@ -28,10 +28,12 @@ public class BonusMovimento extends Bonus {
 		return column;
 	}
 
+	@Override
 	public void setRow(int row) {
 		this.row = row;
 	}
 
+	@Override
 	public void setColumn(int column) {
 		this.column = column;
 	}
