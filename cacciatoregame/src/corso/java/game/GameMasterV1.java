@@ -35,16 +35,16 @@ public class GameMasterV1 implements GameMaster {
 		int row = gameGrid.getHeight() / 2;
 		int column = gameGrid.getWidth() / 2;
 		placeHunter(row, column);
-		// Disposizione Bonus
-		for (int i = 0; i < rnd.nextInt(2, 5); ++i) {
-			bonusLista.add(new BonusMovimento());
+		// Disposizione Bonus Movimento
+		for (int i = 0; i < rnd.nextInt(2, 4); ++i) {
+			this.bonusLista.add(new BonusMovimento());
 		}
 		spawnBonus();
-//		BonusMovimento bonusMov = new BonusMovimento();
-//		gameGrid.getCells()[2][2] = bonusMov;
-//		bonusMov.setRow(2);
-//		bonusMov.setColumn(2);
-//		bonusMovimenti.add(bonusMov);
+		BonusMovimento bonusMov = new BonusMovimento();
+		gameGrid.getCells()[2][2] = bonusMov;
+		bonusMov.setRow(2);
+		bonusMov.setColumn(2);
+		bonusLista.add(bonusMov);
 	}
 
 	private void spawnMonsters() {
