@@ -1,6 +1,7 @@
 package corso.java.game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +25,7 @@ public class GameMasterV1 implements GameMaster {
 
 	public GameMasterV1() {
 		// Creazione della Griglia
-		gameGrid = new GameGrid(20, 15);
+		gameGrid = new GameGrid(15, 15);
 		// Disposizione di 5 Mostri Slyme e 1 Dark
 		for (int i = 0; i < rnd.nextInt(2, 8); ++i) {
 			monsters.add(new MonsterDecorator(new DirtySlime()));
@@ -196,14 +197,22 @@ public class GameMasterV1 implements GameMaster {
 				monsters.remove(monster);
 			}
 		}
-		for (Bonus bonus : bonusLista) {
-			if((hunter.getColumn() == bonus.getColumn()) && (hunter.getRow() == bonus.getRow())) {
-				BonusMovimento bonusMov = (BonusMovimento)bonus;
-				this.movimenti += bonusMov.getMovimenti();
-				gameGrid.getCells()[bonus.getRow()][bonus.getColumn()] = null;
-				this.bonusLista.remove(bonus);
-				break;
-			}
+//		for (Bonus bonus : bonusLista) {
+//			if((hunter.getColumn() == bonus.getColumn()) && (hunter.getRow() == bonus.getRow())) {
+//				BonusMovimento bonusMov = (BonusMovimento)bonus;
+//				this.movimenti += bonusMov.getMovimenti();
+//				gameGrid.getCells()[bonus.getRow()][bonus.getColumn()] = null;
+//				this.bonusLista.remove(bonus);
+//				break;
+//			}
+//		}
+		Iterator<Bonus> iteratoreBonus = bonusLista.iterator();
+		while (iteratoreBonus.hasNext() && (hunter.getColumn() == iteratoreBonus.next().getColumn())
+				&& (hunter.getRow() == iteratoreBonus.next().getRow())) {
+			BonusMovimento bonusMov = (BonusMovimento) iteratoreBonus.next();
+			this.movimenti += bonusMov.getMovimenti();
+			gameGrid.getCells()[iteratoreBonus.next().getRow()][iteratoreBonus.next().getColumn()] = null;
+			this.bonusLista.remove(iteratoreBonus.next());
 		}
 		if (monsters.size() == 0) { // se non ci sono mostri
 			won = true;

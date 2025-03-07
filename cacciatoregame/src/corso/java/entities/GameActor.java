@@ -8,6 +8,7 @@ import lombok.Data;
  *  - Capacità di attacco
  *  - ha una capacità di raccontare come viene visualizzato sulla griglia
  */
+
 @Data
 public abstract class GameActor {
 	int lifeLevel;
